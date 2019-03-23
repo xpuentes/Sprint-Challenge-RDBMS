@@ -4,9 +4,13 @@ exports.up = function(knex, Promise) {
 
     tbl.integer('project_id')
        .unsigned()
-       .notNullable()
+       .notNullable();
+
+    tbl.foreign('project_id')
        .references('id')
-       .inTable('projects');
+       .inTable('projects')
+       .onDelete('CASCADE')
+       .onUpdate('CASCADE');
 
     tbl.string('description', 128)
        .notNullable();
