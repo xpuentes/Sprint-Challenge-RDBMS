@@ -18,13 +18,9 @@ module.exports = {
     return db('actions');
   },
 
-  getProjectWithActions: (project_id) => {
-    return db('projects')
-            .where('id', project_id)
-            .then(actions => {
-              return db('actions')
-                      .select('*')
-                      .where('project_id', project_id);
-            });
+  getProjectWithActions: async (project_id) => {
+    const projects = await db('projects').where({id: project_id}).first();
+    const actions = await db('actions').where({project_id: project_id});
+    return {...projects, actions: actions};
   }
 }

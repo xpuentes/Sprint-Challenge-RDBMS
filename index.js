@@ -19,6 +19,7 @@ server.get('/api/projects', (req, res) => {
 server.get('/api/projects/:project_id', (req, res) => {
   const { project_id } = req.params;
 
+  console.log('Project ID', project_id);
   db.getProjectWithActions(project_id)
     .then(projects => {
       res.json(projects);
